@@ -1,0 +1,20 @@
+# Config file for fingerprint generator
+
+output_dir: './models/stylegan_generators'
+structure: 'linear'
+device_id: ('0')
+checkpoint_factor: 4
+feedback_factor: 4
+dataset:
+  img_dir: './data/enhanced_fingerprints'
+  folder: False
+  resolution: 512
+  channels: 1
+model:
+  gen:
+    mapping_layers: 8
+    # Negative numbers represent no truncation layers
+    truncation_psi: -1.
+sched:
+  epochs: [4,4,4,8,16,16,32,32]
+  batch_sizes: [128, 128, 128, 64, 32, 16, 8, 4]
