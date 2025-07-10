@@ -6,15 +6,21 @@ A preprocessing pipeline for fingerprint images including:
 - Image cropping and centering 
 - Fingerprint enhancement
 - Format standardization
+- Fingerprint matching and minutiae extraction (NEW)
 
 Example usage:
-    from preprocessing import PreprocessingPipeline
-    
+    from preprocessing import PreprocessingPipeline, FingerprintMatcher
+
+    # Preprocessing
     pipeline = PreprocessingPipeline()
     pipeline.process_folder(
         input_dir="raw_fingerprints/",
         output_dir="processed_fingerprints/"
     )
+
+    # Matching
+    matcher = FingerprintMatcher()
+    score = matcher.match_pair("probe.png", "gallery.png")
 """
 
 from .config import Config, get_default_config
@@ -25,6 +31,7 @@ from .fingerprint_processor import (
     crop_and_center_image,
     enhance_fingerprint
 )
+from .fingerprint_matcher import FingerprintMatcher  # NEW
 
 import os
 import logging
@@ -42,17 +49,17 @@ class PreprocessingPipeline:
     """
     Main preprocessing pipeline class for fingerprint image processing.
     """
-    
+
     def __init__(self, config: Optional[Config] = None):
         """
         Initialize the preprocessing pipeline.
-        
+
         Args:
             config: Configuration object (optional, uses default if None)
         """
         self.config = config if config is not None else get_default_config()
         logger.info("Preprocessing pipeline initialized")
-    
+
     def process_folder(
         self,
         input_dir: str,
@@ -63,36 +70,36 @@ class PreprocessingPipeline:
     ) -> dict:
         """
         Process all fingerprint images in a folder.
-        
+
         Args:
             input_dir: Directory containing raw fingerprint images
             output_dir: Output directory for processed images
             filter_quality: Whether to apply NFIQ quality filtering
             enhance: Whether to apply fingerprint enhancement
             crop_center: Whether to apply cropping and centering
-        
+
         Returns:
             Dictionary with processing statistics
         """
         logger.info(f"Starting preprocessing: {input_dir} -> {output_dir}")
-        
+
         processed_count, total_images = process_folder(
-            input_dir, output_dir, 
+            input_dir, output_dir,
             filter_nfiq_score=filter_quality,
             enhance=enhance,
             crop_center=crop_center,
             config=self.config
         )
-        
+
         stats = {
             'processed': processed_count,
             'total': total_images,
             'success_rate': processed_count / total_images if total_images > 0 else 0
         }
-        
+
         logger.info(f"Processing complete: {processed_count}/{total_images} images processed successfully")
         return stats
-    
+
     def process_single_image(
         self,
         input_path: str,
@@ -103,14 +110,14 @@ class PreprocessingPipeline:
     ) -> bool:
         """
         Process a single fingerprint image.
-        
+
         Args:
             input_path: Path to input image
             output_path: Path for output image
             filter_quality: Whether to apply NFIQ quality filtering
             enhance: Whether to apply fingerprint enhancement
             crop_center: Whether to apply cropping and centering
-        
+
         Returns:
             True if processing succeeded, False otherwise
         """
@@ -132,6 +139,7 @@ def create_pipeline(config: Optional[Config] = None) -> PreprocessingPipeline:
 # Export main classes and functions
 __all__ = [
     'PreprocessingPipeline',
+    'FingerprintMatcher',  # NEW
     'Config',
     'get_default_config',
     'create_pipeline',

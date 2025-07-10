@@ -10,7 +10,9 @@ class Config:
     
     # External tool paths
     NFIQ_PATH = os.path.join(os.path.dirname(__file__), "external_tools", "nfiq")
-    
+    MINDTCT_PATH = os.path.join(os.path.dirname(__file__), "external_tools", "mindtct")  # NEW
+    BOZORTH3_PATH = os.path.join(os.path.dirname(__file__), "external_tools", "bozorth3")  # NEW
+
     # Image processing parameters
     NFIQ_THRESHOLD = 3  # Filter images with NFIQ score >= this value (1=best, 5=worst)
     CROPPING_MARGIN = 75  # Margin for cropping in pixels
