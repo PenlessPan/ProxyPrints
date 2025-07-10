@@ -1,0 +1,22 @@
+# Core PyTorch and deep learning
+torch
+torchvision
+tensorflow
+
+# Configuration and utilities
+yacs
+tqdm
+numpy>=1.19.0
+
+# Image processing and computer vision
+opencv-python>=4.5.0
+Pillow>=8.0.0
+scikit-image>=0.18.0
+
+# Machine learning and data analysis
+scikit-learn
+matplotlib
+
+# Fingerprint enhancement
+fingerprint-enhancer
+

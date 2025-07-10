@@ -1,9 +1,0 @@
-# Core dependencies for fingerprint preprocessing
-opencv-python>=4.5.0
-numpy>=1.19.0
-Pillow>=8.0.0
-tqdm>=4.60.0
-scikit-image>=0.18.0
-
-# Optional enhancement (comment out if not needed)
-fingerprint-enhancer>=0.1.0

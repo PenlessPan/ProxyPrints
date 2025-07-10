@@ -496,12 +496,3 @@ class ProxyPrints:
         
         return model_files
         
-no rotation)
-        """
-        # Step 1: Embed - get the embedding from the input image
-        embedding = self.embed(input_image_path)
-
-        # Step 2: Generate - create a new fingerprint from the embedding
-        generated_image = self.generate(embedding)
-
-        return generated_image
