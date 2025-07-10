@@ -50,7 +50,6 @@ class FingerprintMatcher:
         # Initialize paths
 
 
-# Use your config system instead of hardcoded paths
         self.config = config if config is not None else get_default_config()
         self.mindtct_path = self.config.MINDTCT_PATH
         self.bozorth3_path = self.config.BOZORTH3_PATH
