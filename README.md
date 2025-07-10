@@ -364,7 +364,9 @@ ProxyPrints.print_model_info()
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- **Original code** (preprocessing, embedder, ProxyPrint): MIT License
+- **StyleGAN.pytorch/**: CC BY-NC 4.0 (see directory licenses)
+- **External tools**: Public domain (NIST NBIS)
 
 ---
 
